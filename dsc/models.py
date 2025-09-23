@@ -640,18 +640,17 @@ class Model(pl.LightningModule):
         mos = mos.float()
 
         est_ref_scale = self.network.audio_net(audio)
-        mean_estimate = self.network.aligner(est_ref_scale, dataset)
+        if self.network.use_aligner:
+            # Aligner is active so we use it
+            mean_estimate = self.network.aligner(est_ref_scale, dataset)
+        else:
+            # Aligner not on yet so ignore it
+            mean_estimate = est_ref_scale
 
         # Do we need this?
         est_ref_scale = torch.squeeze(est_ref_scale, dim=1)
         mean_estimate = torch.squeeze(mean_estimate, dim=1)
 
-        # mean_estimate = self.network(audio, dataset)
-        # If audio is 2-D (e.g., wav2vec representation), needs to be squeezed
-        # in diminsion 1 here
-        # If audio is raw wav, this won't do anything (dim 1 will be frames
-        # and != 1)
-        # mean_estimate = torch.squeeze(mean_estimate, dim=1)
         if is_training:
             # Store min and max observed for each dataset (used for plotting alignments)
             for ds in torch.unique(dataset):
