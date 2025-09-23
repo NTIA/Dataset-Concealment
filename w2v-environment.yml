@@ -1,0 +1,35 @@
+name: dsc-w2v
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.12
+  - clearml
+  - clearml-agent
+  - hydra-core
+  - IPython
+  - librosa
+  - jupyter
+  - matplotlib
+  - numpy
+  - plotly
+  - pre-commit
+  - poetry
+  - pytorch=2.3.1
+  - pytorch-cuda=11.8
+  - conda-forge::pytorch-lightning
+  - scipy
+  - torchvision
+  - torchaudio=2.3.1
+  - pip
+  - pip:
+    - kaleido
+    - nbdime
+    - pandas
+    - pylance
+    - sox
+    - soundfile
+    - tensorboard
+    - transformers
+    - git+https://github.com/JPieper-NTIA/fairseq.git@main
