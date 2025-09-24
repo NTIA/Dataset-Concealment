@@ -16,7 +16,7 @@ import pytorch_lightning as pl
 from omegaconf import DictConfig, OmegaConf, open_dict
 from tqdm import tqdm
 import alignnet
-import nr_toolbox
+import dsc
 
 # Load clearml Task only if clearml is imported
 try:
@@ -173,7 +173,7 @@ def post_train(model, audio_data, loggers, task=None):
 
 
 @hydra.main(
-    config_path="nr_toolbox/config-alignnet", config_name="conf.yaml", version_base=None
+    config_path="dsc.config-alignnet", config_name="conf.yaml", version_base=None
 )
 def main(cfg: DictConfig) -> None:
     if cfg.logging.logger == "clearml":

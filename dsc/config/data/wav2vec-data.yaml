@@ -1,0 +1,11 @@
+defaults:
+  - data_dirs: full-data
+
+_target_: dsc.AudioDataModule
+split: null
+fs: 16000
+batch_size: 8
+num_workers: 6
+transform_time: get
+cache: false
+pathcol: audio_path
