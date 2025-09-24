@@ -49,8 +49,10 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--output-dir",
-        default="data-groups",
-        help="Directory to store dataset group files.",
+        default="dsc/config/data/data_dirs",
+        help=(
+            "Directory to store dataset group files. Ideally accessible by hydra config"
+        ),
     )
 
     args = parser.parse_args()

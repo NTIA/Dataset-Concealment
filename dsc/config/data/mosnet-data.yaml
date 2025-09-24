@@ -1,5 +1,5 @@
 defaults:
-  - data_dirs: full-data
+  - data_dirs: Global
 
 _target_: dsc.AudioDataModule
 split: null
