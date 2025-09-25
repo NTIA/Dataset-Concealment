@@ -2,20 +2,11 @@
 This repository is in support of the ICASSP 2026 submission titled "Unseen but not Unknown: Using Dataset Concealment to Robustly Evaluate Speech Quality Estimation Models."
 
 # Installation
-Main envrironment
 ```
 conda env create -f environment.yml
 conda activate dsc
 pip install .
 ```
-
-
-TODO - update this with more detailed install instructions (should actually all be good with the environment files now I think --- they each use pip install from relevant githubs directly.)
-* AlignNets code: https://github.com/NTIA/alignnet
-* NISQA code: https://github.com/gabrielmittag/NISQA
-    * Only NISQA_lib.py is required.
-* Wav2Vec2.0 FAIRSEQ fork: https://github.com/JPieper-NTIA/fairseq
-    * Minor updates to make it easier to train Wav2Vec2.0 for speech quality estimation in more modern python environments.
 
 # Data Preparation
 In order to quickly define the Individual, Concealed, and Global dataset groups and train models with them, use the `prep-dataset-groups.py` CLI.
@@ -41,26 +32,29 @@ Running
 ```
 python prep-dataset-groups.py example_dataset_input.yaml --output-dir data-groups
 ```
-will generate all the required dataset group files in the `data-groups` folder.
-The `data-groups` folder has the following structure.
+will generate all the required dataset group files in the `dsc/config/data/data_dirs` folder.
+The `data_dirs` folder has the following structure.
 ```bash
-data-groups/
+dsc/config/data/data_dirs/
 ├── Concealed
 │   ├── Conceal-Dataset1.yaml
 │   ├── Conceal-Dataset2.yaml
 │   └── Conceal-Dataset3.yaml
 ├── Global.yaml
-└── Individual
-    ├── Dataset1.yaml
-    ├── Dataset2.yaml
-    └── Dataset3.yaml
+├── Individual
+│   ├── Dataset1.yaml
+│   ├── Dataset2.yaml
+│   └── Dataset3.yaml
 ```
 
 # Training Details
+The following enables Global training on the first optimization device availble. 
+This may need to be updated depending on your configuration.
+
 Wav2Vec
 ```
 python train.py \
-data/data_dirs=quick-debug.yaml \
+data/data_dirs=Global \
 'optimization.devices=[0]' \
 --config-dir dsc/config/models/ \
 --config-name alignnet-wav2vec
@@ -69,7 +63,7 @@ data/data_dirs=quick-debug.yaml \
 NISQA
 ```
 python train.py \
-data/data_dirs=quick-debug.yaml \
+data/data_dirs=Global \
 'optimization.devices=[0]' \
 --config-dir dsc/config/models/ \
 --config-name alignnet-nisqa
@@ -78,21 +72,19 @@ data/data_dirs=quick-debug.yaml \
 MOSNet
 ```
 python train.py \
-data/data_dirs=quick-debug.yaml \
+data/data_dirs=Global \
 'optimization.devices=[0]' \
 --config-dir dsc/config/models/ \
 --config-name alignnet-MOSNet
 ```
 
+## Training Concealed or Individual models in a multirun
+The following example demonstrates quickly training all the concealed dataset groups.
+The logic for other models or individual dataset groups is similar.
 ```
-python ~/projects/nr-ml-speech-quality-toolbox/train.py -m \
-project.name='Dataset Alignment/debug' \
-project.task=mosnet \
-data/data_dirs=holdouts/hold-NISQA \
-data.split=0 \
-network.aligner.reference_index=0 \
-network.aligner_corr_threshold=-1 \
+python train.py -m \
+data/data_dirs=Concealed/Conceal-Dataset1,Concealed/Conceal-Dataset2,Concealed/Conceal-Dataset3 \
 'optimization.devices=[0]' \
---config-dir ~/projects/nr-ml-speech-quality-toolbox/nr_toolbox/config-alignnet/models/ \
---config-name alignnet-MOSNet.yaml
+--config-dir dsc/config/models/ \
+--config-name alignnet-nisqa
 ```
