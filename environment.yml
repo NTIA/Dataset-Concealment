@@ -31,4 +31,6 @@ dependencies:
     - sox
     - soundfile
     - tensorboard
+    - transformers
     - git+https://github.com/ntia/alignnet.git@develop
+    - git+https://github.com/JPieper-NTIA/fairseq.git@main
