@@ -11,8 +11,8 @@ defaults:
   - _self_
 
 project:
-  name: Dataset Alignment
-  task: NISQA-AlignNet
+  name: Dataset Concealment
+  task: NISQA
 
 finetune:
   restore_file: null

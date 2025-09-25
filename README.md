@@ -2,6 +2,14 @@
 This repository is in support of the ICASSP 2026 submission titled "Unseen but not Unknown: Using Dataset Concealment to Robustly Evaluate Speech Quality Estimation Models."
 
 # Installation
+Main envrironment
+```
+conda env create -f environment.yml
+conda activate dsc
+pip install .
+```
+
+
 TODO - update this with more detailed install instructions (should actually all be good with the environment files now I think --- they each use pip install from relevant githubs directly.)
 * AlignNets code: https://github.com/NTIA/alignnet
 * NISQA code: https://github.com/gabrielmittag/NISQA
@@ -49,3 +57,42 @@ data-groups/
 ```
 
 # Training Details
+Wav2Vec
+```
+python train.py \
+data/data_dirs=quick-debug.yaml \
+'optimization.devices=[0]' \
+--config-dir dsc/config/models/ \
+--config-name alignnet-wav2vec
+```
+
+NISQA
+```
+python train.py \
+data/data_dirs=quick-debug.yaml \
+'optimization.devices=[0]' \
+--config-dir dsc/config/models/ \
+--config-name alignnet-nisqa
+```
+
+MOSNet
+```
+python train.py \
+data/data_dirs=quick-debug.yaml \
+'optimization.devices=[0]' \
+--config-dir dsc/config/models/ \
+--config-name alignnet-MOSNet
+```
+
+```
+python ~/projects/nr-ml-speech-quality-toolbox/train.py -m \
+project.name='Dataset Alignment/debug' \
+project.task=mosnet \
+data/data_dirs=holdouts/hold-NISQA \
+data.split=0 \
+network.aligner.reference_index=0 \
+network.aligner_corr_threshold=-1 \
+'optimization.devices=[0]' \
+--config-dir ~/projects/nr-ml-speech-quality-toolbox/nr_toolbox/config-alignnet/models/ \
+--config-name alignnet-MOSNet.yaml
+```

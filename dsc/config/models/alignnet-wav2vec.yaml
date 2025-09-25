@@ -11,8 +11,8 @@ defaults:
   - _self_
 
 project:
-  name: Dataset Alignment
-  task: Wav2Vec-AlignNet
+  name: Dataset Concealment
+  task: Wav2Vec
 
 finetune:
   restore_file: null

@@ -173,7 +173,7 @@ def post_train(model, audio_data, loggers, task=None):
 
 
 @hydra.main(
-    config_path="dsc.config-alignnet", config_name="conf.yaml", version_base=None
+    config_path="dsc/config", config_name="conf.yaml", version_base=None
 )
 def main(cfg: DictConfig) -> None:
     if cfg.logging.logger == "clearml":
