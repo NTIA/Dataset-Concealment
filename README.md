@@ -8,6 +8,13 @@ conda activate dsc
 pip install .
 ```
 
+In order to run and create an environment with package versions exactly matching those used to run tests for the paper run
+```
+conda env create -f environment-paper.yml
+conda activate dsc-paper
+pip install .
+```
+
 # Data Preparation
 In order to quickly define the Individual, Concealed, and Global dataset groups and train models with them, use the `prep-dataset-groups.py` CLI.
 
@@ -88,3 +95,6 @@ data/data_dirs=Concealed/Conceal-Dataset1,Concealed/Conceal-Dataset2,Concealed/C
 --config-dir dsc/config/models/ \
 --config-name alignnet-nisqa
 ```
+
+# Information Regarding Paper Results
+The config files in the `dsc/config` directory detail all the configuration details used to train models to generate results for the paper "Unseen but not Unknown: Using Dataset Concealment to Robustly Evaluate Speech Quality Estimation Models."
