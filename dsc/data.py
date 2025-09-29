@@ -755,7 +755,7 @@ class AudioDataModule(pl.LightningDataModule):
                 # If we only passed in data_dirs we need to assign them to
                 # inference_dirs
                 self.inference_dirs = self.data_dirs
-            
+
             self.predict = self.DataClass(
                 data_files=self.inference_dirs,
                 **self.data_class_kwargs,

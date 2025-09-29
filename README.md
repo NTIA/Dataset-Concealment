@@ -98,3 +98,8 @@ data/data_dirs=Concealed/Conceal-Dataset1,Concealed/Conceal-Dataset2,Concealed/C
 
 # Information Regarding Paper Results
 The config files in the `dsc/config` directory detail all the configuration details used to train models to generate results for the paper "Unseen but not Unknown: Using Dataset Concealment to Robustly Evaluate Speech Quality Estimation Models."
+
+## Example models
+The `trained_model` folder contains three trained, example model checkpoints used in the paper. 
+The results from the paper come from 10 independently trained versions of each model, so the included checkpoints cannot fully replicate results on their own.
+They are included for convenience.
