@@ -1,6 +1,8 @@
 # Dataset-Concealment
 This repository is in support of the ICASSP 2026 submission titled "Unseen but not Unknown: Using Dataset Concealment to Robustly Evaluate Speech Quality Estimation Models."
 
+The software builds off of the published repository for [AlignNets](https://github.com/NTIA/alignnet).
+
 # Installation
 ```
 conda env create -f environment.yml
