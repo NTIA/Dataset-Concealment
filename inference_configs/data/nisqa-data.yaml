@@ -1,0 +1,24 @@
+_target_: dsc.AudioDataModule
+data_dirs: ???
+split: null
+batch_size: 1
+num_workers: 0
+persistent_workers: false
+transform_time: get
+transform: NULL
+cache: false
+fs: null
+pathcol: audio_path
+n_outs: 1 # Needs to match the number of NISQA heads
+smart_save: /data/nisqa-features/
+# Mel-Specs options
+ms_sr: null # resample speech signal to 'ms_sr', (usually not needed, because window length 'ms_win_length' is adjusted automatically for different sample frequencies)
+ms_fmax: 20000 # maximum considered Mel-band frequency (in Hz), set to 20k for fullband speech samples
+ms_n_fft: 4096 # padded fft window length (in bins), 4096 still fits 40 ms window length, even for 96kHz sample rate
+ms_hop_length: 0.01 # hop length of fft windowing (in seconds)
+ms_win_length: 0.02 # fft window length (in seconds), will be padded with zeros to match 'ms_n_fft'
+ms_n_mels: 48 # number of Mel bands
+ms_seg_length: 15 # width of extracted Mel-spec segments (in bins)
+ms_seg_hop_length: 4 # hop length of segments (in bins), decreasing this may improve performance but increases memory usage and runtime. segment hop length in seconds: ms_hop_length*ms_seg_hop_length
+ms_max_segments: null # max segment length (in bins). if samples of different duration are used they will be padded. one segment corresponds to 40ms -> 0.04*1300=52sec max sample duration. increase if you apply the model to longer samples
+ms_channel: null # audio channel in case of stereo file (0->left, 1->right). if null, mono mix is used

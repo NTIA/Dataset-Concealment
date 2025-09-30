@@ -1,0 +1,10 @@
+_target_: dsc.AudioDataModule
+data_dirs: ???
+split: null
+fs: 16000
+batch_size: 1
+num_workers: 0
+persistent_workers: false
+transform_time: get
+cache: false
+pathcol: audio_path

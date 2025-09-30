@@ -15,7 +15,7 @@ from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
 
 @hydra.main(
-    config_path="./inference_configs", config_name="config.yaml", version_base=None
+    config_path="./inference_configs", config_name="nisqa.yaml", version_base=None
 )
 def main(cfg: DictConfig) -> None:
     """
@@ -26,17 +26,19 @@ def main(cfg: DictConfig) -> None:
 
     # Transform
     transform = hydra.utils.instantiate(cfg.transform)
+    data_class = hydra.utils.instantiate(cfg.dataclass)
 
     print("Initializing data")
     audio_data = hydra.utils.instantiate(
         cfg.data,
         transform=transform,
+        DataClass=data_class,
     )
+
     audio_data.setup("predict")
 
     # load the dataloader
     dataloader = audio_data.predict_dataloader()
-    breakpoint()
 
     print(f"Loading model from {cfg.model.path}")
     model = alignnet.load_model(cfg.model.path)
@@ -55,27 +57,26 @@ def main(cfg: DictConfig) -> None:
     with torch.no_grad():
         output_dicts = []
         print(f"Generating estimations")
-        breakpoint()
-        for ix, (audio, mos, dataset) in enumerate(
-            tqdm(audio_data, total=len(audio_data))
-        ):
-            # Make audio look batched
-            audio = audio[None, None, :]
-            audio = audio.to(device)
+        for ix, (audio, mos, dataset) in enumerate(tqdm(dataloader)):
+            if isinstance(audio, list):
+                if len(audio) == 1:
+                    audio = [(audio[0][0].to(device), audio[0][1].to(device))]
+
+            else:
+                audio = audio.to(device)
 
             est = model(audio, dataset_index)
-            audio_path = audio_data.score_file.loc[ix, audio_data.pathcol]
+            audio_path = audio_data.predict.score_file.loc[
+                ix, audio_data.predict.pathcol
+            ]
             output_dicts.append(
                 {
                     "file": audio_path,
                     "estimate": est.to("cpu").numpy()[0],
-                    "dataset": dataset,
-                    "AlignNet dataset index": dataset_index.to("cpu").numpy()[0]
+                    "dataset": dataset.numpy()[0],
+                    "AlignNet dataset index": dataset_index.to("cpu").numpy()[0],
                 }
             )
-            # Iterating over Datasets does not always stop appropriately so this ensures it does
-            if ix == len(audio_data) - 1:
-                break
     output_df = pd.DataFrame(output_dicts)
     print("First 5 results:")
     print(output_df.head())
