@@ -14,7 +14,7 @@ template: |-
   To use a model at inference, you must override three parameters:
   * model.path : str pointing to the path containing a trained model 
     (must have a `model.ckpt` and `config.yaml` file in path.)
-  * data.data_files : list containing paths to csv files with filepaths to perform inference on.
+  * data.data_dirs : list containing paths to csv files with filepaths to perform inference on.
     The path name of the csv must correspond to `data.pathcol` which can be overriden.
   * output.file : str to filepath where outputs will be saved.
 
@@ -31,9 +31,6 @@ template: |-
   ```
   python inference.py input_type=audio --help
   ```
-  
-  The appropriate input type is determined by what the trained model expects.
-  The default is stft features.
 
   The model.dataset_index override allows you to get estimates with different dataset alignment functions at inference.
   It defaults to the reference dataset used at training but can be set to the integer corresponding to any other training dataset.

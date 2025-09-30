@@ -25,9 +25,9 @@ template: |-
   ```
   
   For another example, to see the config file and all overrideable parameters for 
-  training MOSNet with AlignNet run:
+  training NISQA with AlignNet run:
   ```
-  python train.py --config-dir alignnet/config/models --config-name=alignnet-MOSNet --cfg job
+  python train.py --config-dir dsc/config/models/ --config-name alignnet-nisqa --cfg job
   ```
   -------
   $CONFIG
