@@ -1,2 +1,2 @@
 _target_: hydra.utils.get_class
-path: alignnet.MOSNetAudioData
+path: dsc.MOSNetAudioData

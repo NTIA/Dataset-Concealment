@@ -86,7 +86,10 @@ class AudioData(Dataset):
 
     def __getitem__(self, idx):
         dataset = self.score_file.loc[idx, "Dataset_Indicator"]
-        mos = self.score_file.loc[idx, self.target]
+        if self.target is not None:
+            mos = self.score_file.loc[idx, self.target]
+        else:
+            mos = torch.nan
         if self.target_transform is not None:
             mos = self.target_transform(mos, dataset)
 
@@ -400,7 +403,10 @@ class MOSNetAudioData(AudioData):
 
     def __getitem__(self, idx):
         dataset = self.score_file.loc[idx, "Dataset_Indicator"]
-        mos = self.score_file.loc[idx, self.target]
+        if self.target is not None:
+            mos = self.score_file.loc[idx, self.target]
+        else:
+            mos = torch.nan
 
         if self.target_transform is not None:
             mos = self.target_transform(mos, int(dataset))
@@ -518,7 +524,11 @@ class NISQAAudioData(AudioData):
 
     def __getitem__(self, idx):
         dataset = self.score_file.loc[idx, "Dataset_Indicator"]
-        mos = self.score_file.loc[idx, self.target]
+
+        if self.target is not None:
+            mos = self.score_file.loc[idx, self.target]
+        else:
+            mos = torch.nan
         if self.n_outs > 1:
             mos = self.n_outs * [mos]
 
