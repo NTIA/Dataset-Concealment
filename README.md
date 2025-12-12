@@ -149,3 +149,33 @@ model.path=trained_models/MOSNet-AlignNet-Global \
 output.file=estimations.csv \
 --config-name mosnet.yaml
 ```
+
+## Datasets used in the paper
+Most of the datasets used in the paper can be found by finding the links and references [here](https://github.com/NTIA/alignnet?tab=readme-ov-file#gathering-datasets-used-in-2024-conference-paper).
+
+The remaining dataset can be found at:
+* [TMHINT-QI](https://github.com/yuwchen/InQSS)
+  * Chen, Y.-W., Tsao, Y. (2022) InQSS: a speech intelligibility and quality assessment model using a multi-task learning network. Proc. Interspeech 2022, 3088-3092, doi: 10.21437/Interspeech.2022-10153
+
+### Training splits
+For datasets where specifically curated training/testing data splits are provided they are used.
+Specifically the following datasets provide this information:
+* NISQA SIM
+* VMC22
+* TMHINT-QI
+For both NISQA SIM and TMHINT-QI we randomly split the data provided for training into training and validation sets so that 90% of the data was in the training set and 10% in the validation set.
+VMC22 provides specifically curated training, validation, and test sets which were used for all tests.
+To attempt to understand the stability of training individually with VMC22, randomness was achieved by using different random seeds.
+For all other tests the seed was kept fixed and randomness comes from the different data splits only.
+
+For most of the other datasets we randomly split the data to achieve 70% in the training set, 15% in the validation set, and 15% in the test set.
+This applies to the following datasets:
+* Tencent
+* VCC18
+* IU
+* PSTN
+
+The FFTNet and NOIZEUS datasets are significantly smaller than the other datasets used during training.
+They have 1200 and 1664 audio files respectively, an order of magnitude smaller than most of the other datasets.
+Due to this we opted for larger training data splits for these two datasets to ensure that the model had a sufficient number of examples from each to appropriately learn them when training with multiple datasets at once.
+For these two datasets we randomly split the data to achieve 80% in the training set, 10% in the validation set, and 10% in the test set.
