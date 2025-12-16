@@ -21,6 +21,8 @@ pip install .
 In order to quickly define the Individual, Concealed, and Global dataset groups and train models with them, use the `prep-dataset-groups.py` CLI.
 
 ## Example
+Here we present an example for running Dataset Concealment results with three example datasets.
+It is easily extensible to more datasets.
 The file `example_dataset_input.yaml` has an example of what a dataset group dictionary looks like.
 It is formatted as
 ```
