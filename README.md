@@ -39,12 +39,12 @@ path/to/dataset1
 
 Running
 ```
-python prep-dataset-groups.py example_dataset_input.yaml --output-dir data-groups
+python prep-dataset-groups.py example_dataset_input.yaml --output-dir dsc/config/data/data_dirs/example
 ```
-will generate all the required dataset group files in the `dsc/config/data/data_dirs` folder.
-The `data_dirs` folder has the following structure.
+will generate all the required dataset group files in the `dsc/config/data/data_dirs/example` folder.
+The `data_dirs/example` folder has the following structure.
 ```bash
-dsc/config/data/data_dirs/
+dsc/config/data/data_dirs/example
 ├── Concealed
 │   ├── Conceal-Dataset1.yaml
 │   ├── Conceal-Dataset2.yaml
