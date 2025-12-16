@@ -436,9 +436,10 @@ class LinearSequenceAligner(nn.Module):
         """
         Aligner network for dataset alignment.
 
-        The LinearSequenceAligner implements the Aligner as defined in "AlignNet:
-        Learning dataset score alignment functions to enable better training of
-        speech quality estimators."
+        The LinearSequenceAligner implements the Aligner as defined in
+        Pieper, J., Voran, S. (2024) AlignNet: Learning dataset score alignment
+        functions to enable better training of speech quality estimators. Proc.
+        Interspeech 2024, 82-86, doi: 10.21437/Interspeech.2024-74.
 
         Parameters
         ----------
