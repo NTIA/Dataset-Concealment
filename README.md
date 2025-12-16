@@ -4,6 +4,10 @@ This repository is in support of the ICASSP 2026 submission titled "Unseen but n
 The software builds off of the published repository for [AlignNets](https://github.com/NTIA/alignnet).
 
 # Installation
+Clone the repository.
+In order for the clone to include the trained models you will need `git lfs`.
+Installation instructions are [here](https://github.com/git-lfs/git-lfs?tab=readme-ov-file#installing).
+
 ```
 conda env create -f environment.yml
 conda activate dsc
