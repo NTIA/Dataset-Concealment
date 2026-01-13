@@ -1,0 +1,13 @@
+_target_: dsc.AudioDataModule
+data_dirs: ???
+split: null
+smart_save: /data/mosnet-features
+batch_size: 1
+num_workers: 0
+persistent_workers: false
+transform_time: get
+cache: false
+fs: 16000
+flatten: false
+pathcol: audio_path
+target: null

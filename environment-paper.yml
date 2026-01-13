@@ -1,0 +1,34 @@
+name: dsc-paper
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.12
+  - clearml == 2.0.2
+  - clearml-agent == 2.0.4
+  - hydra-core == 1.3.2
+  - IPython == 9.5.0
+  - librosa == 0.11.0
+  - matplotlib == 3.10.6
+  - numpy == 2.2.6
+  - plotly == 6.3.0
+  - pre-commit == 4.3.0
+  - poetry == 2.2.1
+  - pytorch == 2.3.1
+  - pytorch-cuda=11.8
+  - conda-forge::pytorch-lightning == 2.5.5
+  - scipy == 1.16.2
+  - torchvision == 0.18.1
+  - torchaudio == 2.3.1
+  - pip:
+    - kaleido == 1.1.0
+    - nbdime == 4.0.2
+    - pandas == 2.3.2
+    - pylance == 0.37.0
+    - sox == 1.5.0
+    - soundfile == 0.13.1
+    - tensorboard == 2.20.0
+    - transformers == 4.56.2
+    - alignnet @ git+https://github.com/ntia/alignnet.git@985c5fa6059062e38cdc869dcb36285af7bfc51f#egg=alignnet
+    - fairseq @ git+https://github.com/JPieper-NTIA/fairseq.git@6646e7d8cdba45a455c0c7fe440295f006cc7ab3#egg=fairseq

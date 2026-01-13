@@ -1,0 +1,63 @@
+model:
+  _target_: dsc.Model
+  loss_weights: 1
+network:
+  _target_: dsc.AlignNet
+  aligner_corr_threshold: 0.6
+  audio_net_freeze_epochs: 0
+  audio_net:
+    _target_: dsc.NISQA_DIM
+    cnn_model: adapt
+    cnn_c_out_1: 16
+    cnn_c_out_2: 32
+    cnn_c_out_3: 64
+    cnn_kernel_size:
+    - 3
+    - 3
+    cnn_dropout: 0.2
+    cnn_fc_out_h: null
+    cnn_pool_1:
+    - 24
+    - 7
+    cnn_pool_2:
+    - 12
+    - 5
+    cnn_pool_3:
+    - 6
+    - 3
+    td: self_att
+    td_sa_d_model: 64
+    td_sa_nhead: 1
+    td_sa_pos_enc: false
+    td_sa_num_layers: 2
+    td_sa_h: 64
+    td_sa_dropout: 0.1
+    td_lstm_h: null
+    td_lstm_num_layers: null
+    td_lstm_dropout: null
+    td_lstm_bidirectional: null
+    td_2: skip
+    td_2_sa_d_model: null
+    td_2_sa_nhead: null
+    td_2_sa_pos_enc: null
+    td_2_sa_num_layers: null
+    td_2_sa_h: null
+    td_2_sa_dropout: null
+    td_2_lstm_h: null
+    td_2_lstm_num_layers: null
+    td_2_lstm_dropout: null
+    td_2_lstm_bidirectional: null
+    pool: att
+    pool_att_h: 128
+    pool_att_dropout: 0
+  aligner:
+    _target_: dsc.LinearSequenceAligner
+    layer_dims:
+    - 16
+    - 16
+    - 16
+    - 16
+    - 1
+    reference_index: 0
+    embedding_dim: 10
+    num_datasets: 9

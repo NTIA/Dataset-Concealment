@@ -1,0 +1,21 @@
+hydra:
+    run:
+        dir: ./outputs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    job:
+        chdir: False
+
+defaults:
+  - data: mosnet-data
+  - dataclass: mosnet
+  - override hydra/help: inference_help
+  - _self_
+output:
+  file: ???
+
+
+model:
+  path: ???
+  dataset_index: reference
+
+transform:
+  _target_: alignnet.NoneTransform
